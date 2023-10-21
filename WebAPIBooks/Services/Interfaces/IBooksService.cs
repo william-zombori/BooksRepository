@@ -3,12 +3,12 @@ using WebAPIBooks.Helpers;
 
 namespace WebAPIBooks.Services
 {
-    public interface IBookService
+    public interface IBooksService
     {
-        void AddBook(BookDto book);
+        Task AddBookAsync(BookDto book);
         Task<BookDto> GetBookByIdAsync(Guid id);
         Task<PaginatedResultsModel<BookDto>> GetBooksAsync(BooksFilterDto filter);
-        void Update(BookDto user);
-        void Delete(Guid id);
+        Task UpdateAsync(BookDto user);
+        Task DeleteAsync(Guid id);
     }
 }

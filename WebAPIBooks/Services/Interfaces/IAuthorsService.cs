@@ -2,9 +2,9 @@
 
 namespace WebAPIBooks.Services
 {
-    public interface IAuthorService
+    public interface IAuthorsService
     {
-        void AddAuthor(AuthorDto author);
+        Task AddAuthorAsync(AuthorDto author);
         Task<IEnumerable<AuthorDto>> GetAuthorsAsync();
     }
 }

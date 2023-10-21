@@ -4,17 +4,17 @@ using WebAPIBooks.Entities;
 
 namespace WebAPIBooks.Services
 {
-    public class AuthorService : IAuthorService
+    public class AuthorsService : IAuthorsService
     {
-        private readonly IAuthorRepository _authorRepository;
+        private readonly IAuthorsRepository _authorRepository;
 
-        public AuthorService(IAuthorRepository authorRepository)
+        public AuthorsService(IAuthorsRepository authorRepository)
         {
             _authorRepository = authorRepository;
         }
 
-        public void AddAuthor(AuthorDto author)
-            => _authorRepository.AddAuthor(new Author {Id = Guid.NewGuid(), Name = author.Name });
+        public async Task AddAuthorAsync(AuthorDto author)
+            => await _authorRepository.AddAuthorAsync(new Author { Id = Guid.NewGuid(), Name = author.Name });
 
         public async Task<IEnumerable<AuthorDto>> GetAuthorsAsync()
         {

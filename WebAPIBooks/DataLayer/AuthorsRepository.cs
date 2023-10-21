@@ -3,19 +3,19 @@ using WebAPIBooks.Entities;
 
 namespace WebAPIBooks.DataLayer
 {
-    public class AuthorRepository : IAuthorRepository
+    public class AuthorsRepository : IAuthorsRepository
     {
         private readonly BooksDbContext _context;   
 
-        public AuthorRepository(BooksDbContext context)
+        public AuthorsRepository(BooksDbContext context)
         {
             _context = context;
         }
 
-        public void AddAuthor(Author author)
+        public async Task AddAuthorAsync(Author author)
         {
-            _context.Authors.Add(author);
-            _context.SaveChanges();
+            await _context.Authors.AddAsync(author);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Author>> GetAuthorsAsync()

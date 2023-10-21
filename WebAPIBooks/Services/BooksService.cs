@@ -5,23 +5,23 @@ using WebAPIBooks.Helpers;
 
 namespace WebAPIBooks.Services
 {
-    public class BookService : IBookService
+    public class BooksService : IBooksService
     {
-        private readonly IBookRepository _bookRepository;
+        private readonly IBooksRepository _bookRepository;
 
-        public BookService(IBookRepository bookRepository) 
+        public BooksService(IBooksRepository bookRepository) 
         {
             _bookRepository = bookRepository;
         }
 
-        public void AddBook(BookDto book)
-            => _bookRepository.AddBook(new Book { Id = Guid.NewGuid(),
+        public async Task AddBookAsync(BookDto book)
+            => await _bookRepository.AddBookAsync(new Book { Id = Guid.NewGuid(),
                 Title = book.Title,
                 Description = book.Description,
                 AuthorId = book.AuthorId
             });
 
-        public void Delete(Guid id) => _bookRepository.Delete(id);
+        public async Task DeleteAsync(Guid id) => await _bookRepository.DeleteAsync(id);    
 
         public async Task<BookDto> GetBookByIdAsync(Guid id)
         {
@@ -40,13 +40,13 @@ namespace WebAPIBooks.Services
 
         public async Task<PaginatedResultsModel<BookDto>> GetBooksAsync(BooksFilterDto filter)
         {
-            var result = await _bookRepository.GetBooksAsync(filter.Title, filter.AuthorNames, filter.SkipNrOfElements, filter.TakeNrOfElements);
+            var result = await _bookRepository.GetBooksAsync(filter.Title, filter.AuthorIds, filter.SkipNrOfElements, filter.TakeNrOfElements);
 
             return new PaginatedResultsModel<BookDto>(CreateBookDtos(result.Item2), result.Item1);
         }
 
-        public void Update(BookDto book)
-           => _bookRepository.Update(new Book
+        public async Task UpdateAsync(BookDto book)
+           => await _bookRepository.UpdateAsync(new Book
            {
                AuthorId = book.AuthorId,
                Title = book.Title,

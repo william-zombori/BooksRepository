@@ -2,9 +2,9 @@
 
 namespace WebAPIBooks.DataLayer
 {
-    public interface IAuthorRepository
+    public interface IAuthorsRepository
     {
-        void AddAuthor(Author author);
+        Task AddAuthorAsync(Author author);
         Task<IEnumerable<Author>> GetAuthorsAsync();
     }
 }
