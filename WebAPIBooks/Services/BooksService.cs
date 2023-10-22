@@ -15,13 +15,16 @@ namespace WebAPIBooks.Services
         }
 
         public async Task AddBookAsync(BookDto book)
-            => await _bookRepository.AddBookAsync(new Book { Id = Guid.NewGuid(),
+            => await _bookRepository.AddBookAsync(new Book 
+            { 
+                Id = Guid.NewGuid(),
                 Title = book.Title,
                 Description = book.Description,
-                AuthorId = book.AuthorId
+                AuthorId = book.Author.Id,
+                CoverId = book.Cover.Id
             });
 
-        public async Task DeleteAsync(Guid id) => await _bookRepository.DeleteAsync(id);    
+        public async Task DeleteBookAsync(Guid id) => await _bookRepository.DeleteAsync(id);    
 
         public async Task<BookDto> GetBookByIdAsync(Guid id)
         {
@@ -31,10 +34,9 @@ namespace WebAPIBooks.Services
             {
                 Id = book.Id,
                 Title = book.Title,
-                AuthorName = book.Author.Name,
-                AuthorId = book.Author.Id,
+                Author = new AuthorDto{ Id = book.Author.Id, Name = book.Title },
                 Description = book.Description,
-                Image = book.Image
+                Cover = new CoverDto { Id = book.CoverId }
             };
         }
 
@@ -45,13 +47,14 @@ namespace WebAPIBooks.Services
             return new PaginatedResultsModel<BookDto>(CreateBookDtos(result.Item2), result.Item1);
         }
 
-        public async Task UpdateAsync(BookDto book)
+        public async Task UpdateBookAsync(BookDto book)
            => await _bookRepository.UpdateAsync(new Book
            {
-               AuthorId = book.AuthorId,
+               Id = book.Id,
+               AuthorId = book.Author.Id,
                Title = book.Title,
                Description = book.Description,
-               Image = book.Image 
+               CoverId = book.Cover.Id
            });
 
         private IEnumerable<BookDto> CreateBookDtos(IEnumerable<Book> books)
@@ -59,9 +62,9 @@ namespace WebAPIBooks.Services
             {
                 Id = b.Id,
                 Title = b.Title,
-                AuthorName = b.Author.Name,
+                Author = new AuthorDto { Id = b.Author.Id, Name = b.Title },
                 Description = b.Description,
-                Image = b.Image
+                Cover = new CoverDto { Id = b.CoverId }
             });
     }
 }

@@ -47,6 +47,9 @@ namespace WebAPIBooks.DataLayer.Migrations
                     b.Property<Guid>("AuthorId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("CoverId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
@@ -54,10 +57,6 @@ namespace WebAPIBooks.DataLayer.Migrations
                         .IsRequired()
                         .HasMaxLength(2500)
                         .HasColumnType("nvarchar(2500)");
-
-                    b.Property<byte[]>("Image")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -68,7 +67,25 @@ namespace WebAPIBooks.DataLayer.Migrations
 
                     b.HasIndex("AuthorId");
 
+                    b.HasIndex("CoverId")
+                        .IsUnique();
+
                     b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("WebAPIBooks.Entities.Cover", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte[]>("Image")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Covers");
                 });
 
             modelBuilder.Entity("WebAPIBooks.Entities.Book", b =>
@@ -79,12 +96,25 @@ namespace WebAPIBooks.DataLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("WebAPIBooks.Entities.Cover", "Cover")
+                        .WithOne("Book")
+                        .HasForeignKey("WebAPIBooks.Entities.Book", "CoverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Author");
+
+                    b.Navigation("Cover");
                 });
 
             modelBuilder.Entity("WebAPIBooks.Entities.Author", b =>
                 {
                     b.Navigation("Books");
+                });
+
+            modelBuilder.Entity("WebAPIBooks.Entities.Cover", b =>
+                {
+                    b.Navigation("Book");
                 });
 #pragma warning restore 612, 618
         }

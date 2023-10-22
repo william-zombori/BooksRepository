@@ -2,6 +2,7 @@
 using WebAPIBooks.DTOs;
 using WebAPIBooks.Helpers;
 using WebAPIBooks.Services;
+using WebAPIBooks.Services.Interfaces;
 
 namespace WebAPIBooks.Controllers
 {
@@ -10,15 +11,20 @@ namespace WebAPIBooks.Controllers
     public class BooksController : ControllerBase
     {
         private readonly IBooksService _booksService;
+        private readonly ICoversService _coversService;
 
-        public BooksController(IBooksService booksService)
+        public BooksController(IBooksService booksService, ICoversService coversService)
         {
             _booksService = booksService;
+            _coversService = coversService;
         }
 
         [HttpPut]
         public async Task<ActionResult> AddBook(BookDto book)
         {
+            var coverId = await _coversService.AddCoverAsync(book.Cover);
+            book.Cover.Id = coverId;
+
             await _booksService.AddBookAsync(book);
 
             return NoContent();
@@ -43,15 +49,21 @@ namespace WebAPIBooks.Controllers
         [HttpPost]
         public async Task<ActionResult> Update(BookDto book)
         {
-            await _booksService.UpdateAsync(book);
+            if(book.IsCoverImageChanged)
+            {
+                await  _coversService.UpdateCoverAsync(book.Cover);
+            }
+
+            await _booksService.UpdateBookAsync(book);
 
             return NoContent();
         }
 
         [HttpDelete]
-        public async Task<ActionResult> Delete(Guid id)
+        public async Task<ActionResult> Delete(BookDto book)
         {
-            await _booksService.DeleteAsync(id);
+            await _coversService.DeleteCoverAsync(book.Cover.Id);
+            await _booksService.DeleteBookAsync(book.Id);
 
             return NoContent();
         }

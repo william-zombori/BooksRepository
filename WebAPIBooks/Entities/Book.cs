@@ -10,17 +10,17 @@ namespace WebAPIBooks.Entities
         [Required, MaxLength(450)]
         public string Title { get; set; } = string.Empty;
 
-        [Required, MaxLength(2500)]
-        public string Description { get; set; }
-
-        [Required]
-        public byte[] Image { get; set; }
+        [Required(AllowEmptyStrings = true), MaxLength(2500)]
+        public string Description { get; set; } = string.Empty;
+       
+        public DateTime Created { get; set; }
 
         public Guid AuthorId { get; set; }
 
-        public Author Author { get; set; }
+        public Author Author { get; set; } = null!;
 
-        [Required]
-        public DateTime Created { get; set; }
+        public Guid CoverId { get; set; }
+
+        public Cover Cover { get; set; } = null!;
     }
 }

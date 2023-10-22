@@ -1,4 +1,4 @@
-﻿namespace WebAPIBooks.Entities
+﻿namespace WebAPIBooks.Helpers
 {
     public class CustomResponse
     {

@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using WebAPIBooks;
 using WebAPIBooks.DataLayer;
+using WebAPIBooks.DataLayer.Interfaces;
 using WebAPIBooks.Services;
+using WebAPIBooks.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,9 +17,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<BooksDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IAuthorsService, AuthorsService>();
 builder.Services.AddScoped<IBooksService, BooksService>();
+builder.Services.AddScoped<ICoversService, CoversService>();
 builder.Services.AddScoped<IAuthorsRepository, AuthorsRepository>();
 builder.Services.AddScoped<IBooksRepository, BooksRepository>();
-
+builder.Services.AddScoped<ICoversRepository, CoversRepository>();
 
 var app = builder.Build();
 

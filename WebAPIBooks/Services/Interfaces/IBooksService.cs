@@ -8,7 +8,7 @@ namespace WebAPIBooks.Services
         Task AddBookAsync(BookDto book);
         Task<BookDto> GetBookByIdAsync(Guid id);
         Task<PaginatedResultsModel<BookDto>> GetBooksAsync(BooksFilterDto filter);
-        Task UpdateAsync(BookDto user);
-        Task DeleteAsync(Guid id);
+        Task UpdateBookAsync(BookDto user);
+        Task DeleteBookAsync(Guid id);
     }
 }

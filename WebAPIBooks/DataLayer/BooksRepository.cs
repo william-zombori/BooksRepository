@@ -56,9 +56,13 @@ namespace WebAPIBooks.DataLayer
 
         public async Task UpdateAsync(Book book)
         {
-            book.Created = DateTime.UtcNow;
-
-            await _context.Books.AddAsync(book);
+            var dbBook = (await _context.Books.FindAsync(book.Id)) ?? throw new ArgumentException($"Unable to find a book with Id = '{book.Id}'.");
+           
+            dbBook.Title = book.Title;
+            dbBook.Description = book.Description;
+            dbBook.AuthorId = book.AuthorId;
+            dbBook.CoverId = book.CoverId;
+           
             await _context.SaveChangesAsync();
         }
     }
