@@ -1,0 +1,32 @@
+<p-dialog [(visible)]="dialogVisible" [modal]="true" [draggable]="false" [style]="{width: '60%'}">
+
+    <p-progressSpinner class="modalLoader" *ngIf="isSaving"></p-progressSpinner>
+
+    <ng-template pTemplate="header">
+        <span> Author </span>
+    </ng-template>
+
+    <div class="p-grid p-mt-2">
+        <div class="p-col-6">
+            <ng-template pTemplate="content">
+                <div class="p-grid">
+                    <div class="p-col-6">
+                        <div class="p-text-medium p-mb-1">Name</div>
+                        <div class="textarea">
+                            <textarea #t pInputTextarea [(ngModel)]="name"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+    <p-footer>
+        <div class="p-grid">
+            <div class="p-col-12 p-text-right">
+                <button pButton pRipple (click)="cancel()" type="button" label="CANCEL"></button>
+                <button pButton pRipple type="button" label="CREATE" (click)="save()" [disabled]="!(name?.length >0)">
+                </button>
+            </div>
+        </div>
+    </p-footer>
+</p-dialog>

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BooksListComponent } from 'src/books/components/books-list/books-list.component';
 
 const routes: Routes = [
-	{ path: '', redirectTo: 'books', pathMatch: 'full' },
-	//{ path: 'books', component: BooksComponent }
+	{ path: '', component: BooksListComponent },
 ];
 
 @NgModule({

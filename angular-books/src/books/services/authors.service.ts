@@ -6,6 +6,7 @@ import { Author } from '../models/author.model';
 	providedIn: 'root'
 })
 export class AuthorsService {
+	readonly apiUrl = 'http://localhost:5177/api/';
 
 	constructor(private httpClient: HttpClient) { }
 
@@ -22,10 +23,10 @@ export class AuthorsService {
 	}
 
 	public getAuthors(): Promise<Author[]> {
-		return this.httpClient.get<Author[]>(`/api/Authors`).toPromise();
+		return this.httpClient.get<Author[]>(this.apiUrl + 'authors/Get').toPromise();
 	}
 
 	public addAuthor(author: Author): Promise<any> {
-		return this.httpClient.put<any>(`/api/eventIndicators/PutEventIndicatorOutlookText`, author).toPromise();
+		return this.httpClient.put<any>(this.apiUrl + 'authors/AddAuthor', author).toPromise();
 	}
 }

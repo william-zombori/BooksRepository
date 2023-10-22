@@ -1,1 +1,15 @@
-<p>books-list works!</p>
+<div class="p-grid">
+    <div class="p-col-12 layoutPad">
+        <div class="p-col-12 layoutPad">
+            <div class="p-grid p-mt-4">
+                <div class="p-col-12 p-text-right">
+                    <button (click)="openNewAuthorDialog()" pButton pRipple type="button" label="New Author"
+                        style="margin-right: 8px;">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-add-author-dialog #ad (refreshData)="getData()"></app-add-author-dialog>
