@@ -7,6 +7,9 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FormsModule } from '@angular/forms';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { MessageService } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { TableModule } from 'primeng/table';
 
 
 @NgModule({
@@ -19,7 +22,10 @@ import { MessageService } from 'primeng/api';
     DialogModule,
     InputTextareaModule,
     FormsModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    ButtonModule,
+    InputTextModule,
+    TableModule
   ],
   providers: [
     MessageService
