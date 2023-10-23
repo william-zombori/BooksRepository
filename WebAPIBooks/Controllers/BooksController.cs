@@ -39,7 +39,7 @@ namespace WebAPIBooks.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<PaginatedResultsModel<BookDto>>> GetBooks(BooksFilterDto filter)
+        public async Task<ActionResult<PaginatedResultsModel<BookDto>>> GetBooks([FromQuery] BooksFilterDto filter)
         {
             var books = await _booksService.GetBooksAsync(filter);
 
