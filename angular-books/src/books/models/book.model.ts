@@ -9,3 +9,16 @@ export interface Book {
     cover: Cover;
     isCoverImageChanged: boolean;
 }
+
+export interface BooksFilterDto {
+    title: string;
+    authorIds: string[];
+    skipNrOfElements: number;
+    takeNrOfElements: number;
+}
+
+export declare class PaginatedResults<T> {
+    constructor();
+    records: T[];
+    recordsCount: number;
+}

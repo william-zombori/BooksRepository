@@ -62,8 +62,10 @@ namespace WebAPIBooks.Controllers
         [HttpDelete]
         public async Task<ActionResult> Delete(BookDto book)
         {
-            await _coversService.DeleteCoverAsync(book.Cover.Id);
+            var coverId = book.Cover.Id;
+
             await _booksService.DeleteBookAsync(book.Id);
+            await _coversService.DeleteCoverAsync(coverId);
 
             return NoContent();
         }

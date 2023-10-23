@@ -23,10 +23,10 @@ export class AuthorsService {
 	}
 
 	public getAuthors(): Promise<Author[]> {
-		return this.httpClient.get<Author[]>(this.apiUrl + 'authors/Get').toPromise();
+		return this.httpClient.get<Author[]>(this.apiUrl + 'authors').toPromise();
 	}
 
 	public addAuthor(author: Author): Promise<any> {
-		return this.httpClient.put<any>(this.apiUrl + 'authors/AddAuthor', author).toPromise();
+		return this.httpClient.put<any>(this.apiUrl + 'authors', author).toPromise();
 	}
 }
