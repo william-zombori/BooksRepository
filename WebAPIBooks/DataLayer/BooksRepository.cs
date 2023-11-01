@@ -37,7 +37,7 @@ namespace WebAPIBooks.DataLayer
         {
             var query = _context.Books.AsQueryable();
 
-            if(string.IsNullOrEmpty(title))
+            if(!string.IsNullOrEmpty(title))
             {
                 query = query.Where(b => b.Title.Contains(title));
             }
