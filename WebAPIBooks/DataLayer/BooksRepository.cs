@@ -51,7 +51,7 @@ namespace WebAPIBooks.DataLayer
             var count = books.Count();
             var boksPage = books.Skip(skipNrOfElems).Take(takeNrOfElems).ToList();
 
-            return new Tuple<int, IEnumerable<Book>>(count, books);
+            return new Tuple<int, IEnumerable<Book>>(count, boksPage);
         }
 
         public async Task UpdateAsync(Book book)
