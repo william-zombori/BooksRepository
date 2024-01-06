@@ -33,7 +33,7 @@ namespace WebAPIBooks.DataLayer
             return dbBook;
         }
 
-        public async Task<Tuple<int, IEnumerable<Book>>> GetBooksAsync(string title, IEnumerable<Guid> authorIds, int skipNrOfElems, int takeNrOfElems)
+        public async Task<Tuple<int, IEnumerable<Book>>> GetBooksAsync(string title, string description, IEnumerable<Guid> authorIds, int skipNrOfElems, int takeNrOfElems)
         {
             var query = _context.Books.AsQueryable();
 
@@ -42,7 +42,12 @@ namespace WebAPIBooks.DataLayer
                 query = query.Where(b => b.Title.Contains(title));
             }
 
-            if(authorIds != null && authorIds.Count() > 0)
+            if (!string.IsNullOrEmpty(description))
+            {
+                query = query.Where(b => b.Description.Contains(description));
+            }
+
+            if (authorIds != null && authorIds.Count() > 0)
             {
                 query = query.Where(b => authorIds.Contains(b.AuthorId));
             }

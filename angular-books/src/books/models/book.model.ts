@@ -12,6 +12,7 @@ export interface Book {
 
 export interface BooksFilterDto {
     title: string;
+    description: string;
     authorIds: string[];
     skipNrOfElements: number;
     takeNrOfElements: number;

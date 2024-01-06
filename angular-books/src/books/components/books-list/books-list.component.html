@@ -12,7 +12,60 @@
 
         <div class="grid">
             <div class="col-12">
-                <p-table [tableStyle]="{ 'min-width': '50rem' }">
+                <p-table #booksTable [tableStyle]="{ 'min-width': '50rem' }" [dataKey]="dataKey" [value]="records"
+                    [loading]="loading" [lazy]="true" [lazyLoadOnInit]="false" (onLazyLoad)="getData()"
+                    [rowsPerPageOptions]="rowsPerPageOptions" [rows]="defaultRequest.itemsPerPage"
+                    [showCurrentPageReport]="true" [totalRecords]="totalRecords"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [globalFilterFields]="['title', 'description', 'author.name']">
+
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width:25%">Title</th>
+                            <th style="width:25%">Description</th>
+                            <th style="width:25%">Author</th>
+                            <th style="width:25%">Cover</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p-columnFilter field="title" [showMenu]="false">
+                                    <ng-template pTemplate="filter">
+                                        <input [(ngModel)]="booksFilter.title" pInputText
+                                            placeholder="Title to search..." (change)="filterChanged()" />
+                                    </ng-template>
+                                </p-columnFilter>
+                            </th>
+                            <th>
+                                <p-columnFilter field="description" [showMenu]="false">
+                                    <ng-template pTemplate="filter">
+                                        <input [(ngModel)]="booksFilter.description" pInputText
+                                            placeholder="Description to search..." (change)="filterChanged()" />
+                                    </ng-template>
+                                </p-columnFilter>
+                            </th>
+                            <th>
+                                <p-columnFilter field="author.name" [showMenu]="false">
+                                    <ng-template pTemplate="filter">
+                                        <p-multiSelect [(ngModel)]="booksFilter.authorIds" [options]="authors"
+                                            placeholder="Any" (ngModelChange)="filterChanged()" display="chip"
+                                            optionLabel="name">
+                                            <ng-template let-option pTemplate="item">
+                                                <div class="inline-block vertical-align-middle">
+                                                    <span class="ml-1 mt-1">{{ option.name }}</span>
+                                                </div>
+                                            </ng-template>
+                                        </p-multiSelect>
+                                    </ng-template>
+                                </p-columnFilter>
+                            </th>
+                            <th>
+                            </th>
+                            <th>
+                            </th>
+                        </tr>
+                    </ng-template>
+
+
                     <ng-template pTemplate="header" let-columns>
                         <tr>
                             <th *ngFor="let col of columns">
@@ -25,6 +78,12 @@
                             <td *ngFor="let col of columns">
                                 {{ rowData[col.field] }}
                             </td>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="4">No books found.</td>
                         </tr>
                     </ng-template>
                 </p-table>

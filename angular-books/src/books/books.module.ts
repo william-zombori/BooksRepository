@@ -10,6 +10,7 @@ import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { TableModule } from 'primeng/table';
     ProgressSpinnerModule,
     ButtonModule,
     InputTextModule,
-    TableModule
+    TableModule,
+    MultiSelectModule
   ],
   providers: [
     MessageService

@@ -42,7 +42,7 @@ namespace WebAPIBooks.Services
 
         public async Task<PaginatedResultsModel<BookDto>> GetBooksAsync(BooksFilterDto filter)
         {
-            var result = await _bookRepository.GetBooksAsync(filter.Title, filter.AuthorIds, filter.SkipNrOfElements, filter.TakeNrOfElements);
+            var result = await _bookRepository.GetBooksAsync(filter.Title, filter.Descripton, filter.AuthorIds, filter.SkipNrOfElements, filter.TakeNrOfElements);
 
             return new PaginatedResultsModel<BookDto>(CreateBookDtos(result.Item2), result.Item1);
         }
