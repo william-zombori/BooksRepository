@@ -26,7 +26,7 @@ export class BooksService {
 		return this.httpClient.delete<any>(this.apiUrl + 'books', { body: book }).toPromise();
 	}
 
-	public getBooks(filter: BooksFilterDto): Promise<PaginatedResults<Book[]>> {
-		return this.httpClient.get<PaginatedResults<Book[]>>(this.apiUrl + 'books', { params: { 'filter': filter } as any }).toPromise();
+	public getBooks(filter: BooksFilterDto): Promise<PaginatedResults<Book>> {
+		return this.httpClient.get<PaginatedResults<Book>>(this.apiUrl + 'books', { params: { 'filter': filter } as any }).toPromise();
 	}
 }
