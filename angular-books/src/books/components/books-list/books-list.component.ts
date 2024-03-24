@@ -17,7 +17,7 @@ export class BooksListComponent {
 	public loading = false;
 	public totalRecords = 0;
 	public rowsPerPageOptions = [5, 10, 25, 50, 100];
-	public defaultRequest: PaggingInfoExtended;
+	public defaultRequest: PaggingInfoExtended;	// ToDo.........
 	public authors: Author[] = [];
 	public booksFilter: BooksFilterDto;
 

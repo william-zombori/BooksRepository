@@ -19,7 +19,7 @@ export class AddAuthorDialogComponent {
 	constructor(private authorsService: AuthorsService,
 		private messageService: MessageService) { }
 
-	public showDialog() {
+	public showDialog(): void {
 		this.dialogVisible = true;
 	}
 

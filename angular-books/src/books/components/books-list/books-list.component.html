@@ -65,18 +65,16 @@
                         </tr>
                     </ng-template>
 
-
-                    <ng-template pTemplate="header" let-columns>
+                    <ng-template pTemplate="body" let-book>
                         <tr>
-                            <th *ngFor="let col of columns">
-                                {{ col.header }}
-                            </th>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-rowData let-columns="columns">
-                        <tr>
-                            <td *ngFor="let col of columns">
-                                {{ rowData[col.field] }}
+                            <td>
+                                {{ book.title }}
+                            </td>
+                            <td>
+                                {{ book.description }}
+                            </td>
+                            <td>
+                                {{ book.author.name }}
                             </td>
                         </tr>
                     </ng-template>
