@@ -54,9 +54,9 @@ namespace WebAPIBooks.DataLayer
 
             var books = await query.OrderByDescending(b => b.Created).ToListAsync();
             var count = books.Count();
-            var boksPage = books.Skip(skipNrOfElems).Take(takeNrOfElems).ToList();
+            var booksPage = books.Skip(skipNrOfElems).Take(takeNrOfElems).ToList();
 
-            return new Tuple<int, IEnumerable<Book>>(count, boksPage);
+            return new Tuple<int, IEnumerable<Book>>(count, booksPage);
         }
 
         public async Task UpdateAsync(Book book)
