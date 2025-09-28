@@ -8,7 +8,7 @@ namespace WebAPIBooks.Entities
         public Guid Id { get; set; }
 
         [Required]
-        public byte[] Image { get; set; } = null!;
+        public byte[] Image { get; set; } = null!;   //  using the null-forgiving operator (!) to silence the compiler warning.
 
         public Book? Book { get; set; }
     }

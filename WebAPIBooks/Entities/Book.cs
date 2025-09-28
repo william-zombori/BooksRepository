@@ -17,10 +17,10 @@ namespace WebAPIBooks.Entities
 
         public Guid AuthorId { get; set; }
 
-        public Author Author { get; set; } = null!;
+        public Author Author { get; set; } = null!;   //  using the null-forgiving operator (!) to silence the compiler warning.
 
         public Guid CoverId { get; set; }
 
-        public Cover Cover { get; set; } = null!;
+        public Cover Cover { get; set; } = null!;   //  using the null-forgiving operator (!) to silence the compiler warning. 
     }
 }
