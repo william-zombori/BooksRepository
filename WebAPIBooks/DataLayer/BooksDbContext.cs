@@ -13,6 +13,6 @@ namespace WebAPIBooks.DataLayer
         public DbSet<Book> Books { get; set; }
         public DbSet<Cover> Covers { get; set; }
 
-        //  Testing...1
+        //  Testing...1, 2
     }
 }
